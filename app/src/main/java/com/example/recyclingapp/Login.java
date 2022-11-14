@@ -41,6 +41,7 @@ public class Login extends AppCompatActivity {
                         Intent i = new Intent(Login.this , Reciclaje.class);
                         startActivity(i);
                     }else {
+                        password.setText("");
                         Toast.makeText(Login.this, "ERROR AL LOGEAR", Toast.LENGTH_SHORT).show();
                     }
 

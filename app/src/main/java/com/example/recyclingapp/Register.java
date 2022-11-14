@@ -44,43 +44,43 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this, Login.class);
 
-                if (email.getText().toString().isEmpty() || name.getText().toString().isEmpty() || phoneNumber.getText().toString().isEmpty()  || username.getText().toString().isEmpty() || password.getText().toString().isEmpty() || passwordCnf.getText().toString().isEmpty()){
+                if (email.getText().toString().isEmpty()|| name.getText().toString().isEmpty() || phoneNumber.getText().toString().isEmpty()  || username.getText().toString().isEmpty() || password.getText().toString().isEmpty() || passwordCnf.getText().toString().isEmpty()){
                     //complete();
                     Toast.makeText(Register.this, "RELLENA TODOS LOS CAMPOS", Toast.LENGTH_SHORT).show();
 
-                }else{
-                    if (password.getText().toString().equals(passwordCnf.getText().toString())) {
-                        DbUsers dbUsers = new DbUsers(Register.this);
-                        long id = dbUsers.insertUser(
-                                email.getText().toString(),
-                                name.getText().toString(),
-                                phoneNumber.getText().toString(),
-                                username.getText().toString(),
-                                password.getText().toString());
+                }else {
+                        if (password.getText().toString().equals(passwordCnf.getText().toString())) {
+                            DbUsers dbUsers = new DbUsers(Register.this);
+                            long id = dbUsers.insertUser(
+                                    email.getText().toString(),
+                                    name.getText().toString(),
+                                    phoneNumber.getText().toString(),
+                                    username.getText().toString(),
+                                    password.getText().toString());
 
-                        long idGet = dbUsers.getUser(
-                                email.getText().toString(),
-                                name.getText().toString(),
-                                phoneNumber.getText().toString(),
-                                username.getText().toString(),
-                                password.getText().toString());
+                            long idGet = dbUsers.getUser(
+                                    email.getText().toString(),
+                                    name.getText().toString(),
+                                    phoneNumber.getText().toString(),
+                                    username.getText().toString(),
+                                    password.getText().toString());
 
-                        if (id > 0) {
-                            Toast.makeText(Register.this, "RESGISTRO CONFIRMADO", Toast.LENGTH_SHORT).show();
-                            clear();
+                            if (id > 0) {
+                                Toast.makeText(Register.this, "RESGISTRO CONFIRMADO", Toast.LENGTH_SHORT).show();
+                                clear();
 
-                            startActivity(intent);
-                        } else if (idGet < 0) {
-                            Toast.makeText(Register.this, "USUARIO CREADO", Toast.LENGTH_SHORT).show();
-                            clear();
-                            startActivity(intent);
+                                startActivity(intent);
+                            } else if (idGet < 0) {
+                                Toast.makeText(Register.this, "USUARIO CREADO", Toast.LENGTH_SHORT).show();
+                                clear();
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(Register.this, "ERROR AL CREAR EL USUARIO", Toast.LENGTH_SHORT).show();
+                                clear();
+                            }
                         } else {
-                            Toast.makeText(Register.this, "ERROR AL CREAR EL USUARIO", Toast.LENGTH_SHORT).show();
-                            clear();
+                            Toast.makeText(Register.this, "LAS CONTRASEÑAS NO COINCIDEN  RELLENA", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
-                        Toast.makeText(Register.this, "LAS CONTRASEÑAS NO COINCIDEN  RELLENA", Toast.LENGTH_SHORT).show();
-                    }
                 }
 
             }
@@ -96,8 +96,6 @@ public class Register extends AppCompatActivity {
 
 
     }
-
-
 
     public void clear(){
         email.setText("");

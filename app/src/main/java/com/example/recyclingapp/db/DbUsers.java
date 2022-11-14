@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.recyclingapp.Reciclaje;
 
 public class DbUsers extends DbHelper{
     static Context context;
@@ -30,7 +33,7 @@ public class DbUsers extends DbHelper{
             values.put("phoneNumber", phoneNumber);
             values.put("username", username);
             values.put("password", password);
-            values.put("puntos", "0");
+            values.put("puntos", 0);
 
             id = db.insert(TABLE_USERS, null, values);
         } catch (Exception e) {
@@ -77,24 +80,27 @@ public class DbUsers extends DbHelper{
         }
     }
 
-    public Boolean select(String puntos){
+    public int numPuntosUser(String email){
+        int a= 0;
         SQLiteDatabase db = DbUsers.this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select puntos from t_users" ,null);
+        Cursor cursor = db.rawQuery("Select * from t_users where email = '" + email + "'" ,null);
 
         if (cursor.moveToFirst()){
-            return true;
+            a = cursor.getInt(4);
+            return a;
         }else {
-            return false;
+            return a;
         }
     }
 
-    public Boolean update(String puntos){
+    public Boolean update(int puntos){
         try{
             DbHelper myDBHelp = new DbHelper(context);
             SQLiteDatabase DB = myDBHelp.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("puntos", puntos);
-            DB.update(TABLE_USERS, values, "correo_electronico = ?", new String[] {});
+            Toast.makeText(context, "Tienes actualmente" + puntos, Toast.LENGTH_SHORT).show();
+            DB.update(TABLE_USERS, values,null, null);
             return true;
         }catch (Exception e){
             return false;

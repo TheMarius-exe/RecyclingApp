@@ -23,7 +23,6 @@ public class Reciclaje extends AppCompatActivity {
         ImageView plastico = findViewById(R.id.imageAmarillo);
         ImageView vidrio = findViewById(R.id.imageVerde);
 
-        Button verPuntos = findViewById(R.id.verPuntos);
 
         TextView puntos = findViewById(R.id.textPuntsEdit);
 
@@ -33,16 +32,20 @@ public class Reciclaje extends AppCompatActivity {
         organico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean select = dbUsers.select(puntos.getText().toString());
+                int numeroPuntoUsuario= dbUsers.numPuntosUser("admin");
                 int or = 5;
-                int points = Integer.parseInt(puntos.getText().toString());
 
-                int suma = or + points;
+                int suma = or + numeroPuntoUsuario;
 
-                if (select == true){
+                if (numeroPuntoUsuario > 0 ){
                     puntos.setText(Integer.toString(suma));
-                    Boolean update = dbUsers.update(puntos.getText().toString());
-                    Toast.makeText(Reciclaje.this, "+5", Toast.LENGTH_SHORT).show();
+                    Boolean update = dbUsers.update(suma);
+                    if (update == true){
+
+                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 5", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
                 }
@@ -50,43 +53,78 @@ public class Reciclaje extends AppCompatActivity {
 
             }
         });
+        /*
         papel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
                 int pa = 8;
                 int points = Integer.parseInt(puntos.getText().toString());
 
                 int suma = pa + points;
-                puntos.setText(Integer.toString(suma));
+
+                if (select > 1){
+                    puntos.setText(puntos.getText().toString());
+                    puntos.setText(Integer.toString(suma));
+                    Boolean update = dbUsers.update(suma);
+                    if (update == true){
+                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 8", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
         plastico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
                 int plas = 10;
                 int points = Integer.parseInt(puntos.getText().toString());
 
                 int suma = plas + points;
-                puntos.setText(Integer.toString(suma));
-
+                if (select > 1){
+                    puntos.setText(puntos.getText().toString());
+                    puntos.setText(Integer.toString(suma));
+                    Boolean update = dbUsers.update(suma);
+                    if (update == true) {
+                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 10", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         vidrio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
                 int vi = 15;
                 int points = Integer.parseInt(puntos.getText().toString());
 
                 int suma = vi + points;
-                puntos.setText(Integer.toString(suma));
+                    if (select > 1){
+                        puntos.setText(puntos.getText().toString());
+                        puntos.setText(Integer.toString(suma));
+                        Boolean update = dbUsers.update(suma);
+                        if (update == true){
+                            Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 15", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
+                    }
 
             }
         });
-
+*/
 
     }
 

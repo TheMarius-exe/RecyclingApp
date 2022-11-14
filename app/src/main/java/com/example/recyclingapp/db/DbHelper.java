@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private  static final int DATABASE_VERSION = 3;
+    private  static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NOMBRE = "reciclaje.db";
     public static final String TABLE_USERS = "t_users";
 
@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "phoneNumber TEXT NOT NULL," +
                 "username TEXT NOT NULL," +
                 "password TEXT NOT NULL," +
-                "puntos TEXT)");
+                "puntos int)");
     }
 
     @Override
