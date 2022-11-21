@@ -15,12 +15,13 @@ import com.example.recyclingapp.db.DbUsers;
 import org.w3c.dom.Text;
 
 public class Login extends AppCompatActivity {
+    public static TextView email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView email = findViewById(R.id.username);
+        email = findViewById(R.id.username);
         TextView password = findViewById(R.id.password);
         TextView registerTxt = findViewById(R.id.registerTxt);
 
@@ -39,6 +40,7 @@ public class Login extends AppCompatActivity {
                     if (login == true){
                         Toast.makeText(Login.this, "LOGGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(Login.this , Reciclaje.class);
+                        i.putExtra("email",email.getText().toString());
                         startActivity(i);
                     }else {
                         password.setText("");

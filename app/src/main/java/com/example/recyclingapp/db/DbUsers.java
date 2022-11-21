@@ -4,11 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.recyclingapp.Reciclaje;
+import com.example.recyclingapp.Usuario;
+
+import java.util.ArrayList;
 
 public class DbUsers extends DbHelper{
     static Context context;
@@ -80,27 +81,27 @@ public class DbUsers extends DbHelper{
         }
     }
 
-    public int numPuntosUser(String email){
-        int a= 0;
+    public Usuario numPuntosUser(String email){
+        Usuario user = null;
         SQLiteDatabase db = DbUsers.this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from t_users where email = '" + email + "'" ,null);
+        Cursor cursor = db.rawQuery("Select puntos , email from t_users where email = '" + email + "'" ,null);
+
 
         if (cursor.moveToFirst()){
-            a = cursor.getInt(4);
-            return a;
+            user = new Usuario(cursor.getString(1), cursor.getInt(0));
+            return user;
         }else {
-            return a;
+            return user ;
         }
     }
 
-    public Boolean update(int puntos){
+    public Boolean update(int suma, String email){
         try{
             DbHelper myDBHelp = new DbHelper(context);
             SQLiteDatabase DB = myDBHelp.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("puntos", puntos);
-            Toast.makeText(context, "Tienes actualmente" + puntos, Toast.LENGTH_SHORT).show();
-            DB.update(TABLE_USERS, values,null, null);
+            values.put("puntos", suma);
+            DB.update(TABLE_USERS, values,"email ='" + email + "'", null);
             return true;
         }catch (Exception e){
             return false;

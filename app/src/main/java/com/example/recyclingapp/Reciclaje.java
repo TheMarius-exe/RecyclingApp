@@ -1,5 +1,7 @@
 package com.example.recyclingapp;
 
+import static com.example.recyclingapp.Login.email;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -13,10 +15,15 @@ import com.example.recyclingapp.db.DbUsers;
 
 public class Reciclaje extends AppCompatActivity {
 
+    public static TextView puntos;
+    private Usuario user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_reciclaje);
+        String email = getIntent().getStringExtra("email");
+        user = new DbUsers(this).numPuntosUser(email);
 
         ImageView organico = findViewById(R.id.imageNegro);
         ImageView papel = findViewById(R.id.imageAzul);
@@ -24,57 +31,31 @@ public class Reciclaje extends AppCompatActivity {
         ImageView vidrio = findViewById(R.id.imageVerde);
 
 
-        TextView puntos = findViewById(R.id.textPuntsEdit);
+        puntos = findViewById(R.id.textPuntsEdit);
 
         DbUsers dbUsers = new DbUsers(Reciclaje.this);
+        puntos.setText(String.valueOf(user.getPuntos()));
 
 
         organico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int numeroPuntoUsuario= dbUsers.numPuntosUser("admin");
                 int or = 5;
-
-                int suma = or + numeroPuntoUsuario;
-
-                if (numeroPuntoUsuario > 0 ){
-                    puntos.setText(Integer.toString(suma));
-                    Boolean update = dbUsers.update(suma);
-                    if (update == true){
-
-                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 5", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
+                int suma = or + user.getPuntos();
+                new DbUsers(view.getContext()).update(suma, user.getEmail());
+                user = new DbUsers(view.getContext()).numPuntosUser(user.getEmail());
+                puntos.setText(String.valueOf(user.getPuntos()));
+           }
         });
-        /*
+
         papel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
-                int pa = 8;
-                int points = Integer.parseInt(puntos.getText().toString());
-
-                int suma = pa + points;
-
-                if (select > 1){
-                    puntos.setText(puntos.getText().toString());
-                    puntos.setText(Integer.toString(suma));
-                    Boolean update = dbUsers.update(suma);
-                    if (update == true){
-                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 8", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                    }
-                }else{
-                    Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                }
+                int or = 8;
+                int suma = or + user.getPuntos();
+                new DbUsers(view.getContext()).update(suma, user.getEmail());
+                user = new DbUsers(view.getContext()).numPuntosUser(user.getEmail());
+                puntos.setText(String.valueOf(user.getPuntos()));
 
 
             }
@@ -82,49 +63,25 @@ public class Reciclaje extends AppCompatActivity {
         plastico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
-                int plas = 10;
-                int points = Integer.parseInt(puntos.getText().toString());
-
-                int suma = plas + points;
-                if (select > 1){
-                    puntos.setText(puntos.getText().toString());
-                    puntos.setText(Integer.toString(suma));
-                    Boolean update = dbUsers.update(suma);
-                    if (update == true) {
-                        Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 10", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                }
+                int or = 10;
+                int suma = or + user.getPuntos();
+                new DbUsers(view.getContext()).update(suma, user.getEmail());
+                user = new DbUsers(view.getContext()).numPuntosUser(user.getEmail());
+                puntos.setText(String.valueOf(user.getPuntos()));
             }
         });
         vidrio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int select= dbUsers.numPuntosUser(Integer.parseInt(puntos.getText().toString()));
-                int vi = 15;
-                int points = Integer.parseInt(puntos.getText().toString());
-
-                int suma = vi + points;
-                    if (select > 1){
-                        puntos.setText(puntos.getText().toString());
-                        puntos.setText(Integer.toString(suma));
-                        Boolean update = dbUsers.update(suma);
-                        if (update == true){
-                            Toast.makeText(Reciclaje.this, "Se han sumado a tu cuenta: 15", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        Toast.makeText(Reciclaje.this, "ERROR", Toast.LENGTH_SHORT).show();
-                    }
+                int or = 15;
+                int suma = or + user.getPuntos();
+                new DbUsers(view.getContext()).update(suma, user.getEmail());
+                user = new DbUsers(view.getContext()).numPuntosUser(user.getEmail());
+                puntos.setText(String.valueOf(user.getPuntos()));
 
             }
         });
-*/
+
 
     }
 
