@@ -1,16 +1,14 @@
-package com.example.recyclingapp;
-
-import static com.example.recyclingapp.Login.email;
+package com.example.recyclingapp.AccLogIn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.recyclingapp.R;
+import com.example.recyclingapp.Usuario;
 import com.example.recyclingapp.db.DbUsers;
 
 public class Reciclaje extends AppCompatActivity {

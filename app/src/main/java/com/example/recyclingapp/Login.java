@@ -2,7 +2,6 @@ package com.example.recyclingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,9 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recyclingapp.AccLogIn.Menu;
+import com.example.recyclingapp.AccLogIn.Reciclaje;
 import com.example.recyclingapp.db.DbUsers;
-
-import org.w3c.dom.Text;
 
 public class Login extends AppCompatActivity {
     public static TextView email;
@@ -39,7 +38,7 @@ public class Login extends AppCompatActivity {
                     Boolean login = dbUsers.login(email.getText().toString(),password.getText().toString());
                     if (login == true){
                         Toast.makeText(Login.this, "LOGGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(Login.this , Reciclaje.class);
+                        Intent i = new Intent(Login.this , Menu.class);
                         i.putExtra("email",email.getText().toString());
                         startActivity(i);
                     }else {

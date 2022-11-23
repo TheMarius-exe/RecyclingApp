@@ -1,14 +1,16 @@
-package com.example.recyclingapp;
+package com.example.recyclingapp.AccLogIn;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.recyclingapp.Login;
+import com.example.recyclingapp.R;
+import com.example.recyclingapp.Register;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , database.class);
+                Intent intent = new Intent(MainActivity.this , com.example.recyclingapp.database.class);
                 startActivity(intent);
             }
         });
